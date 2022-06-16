@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-
 // CORS
 const cors = require('cors')
 const corsOptions = {
-    origin: process.env.ORIGIN,
+    origin: "www.amigoinvisible.net",
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 app.use(cors(corsOptions))
