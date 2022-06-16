@@ -14,7 +14,7 @@ let draw = new mongoose.Schema({
             exclude: [String],
             wishlist: [String],
             result: String,
-            errors: [String]
+            errorsLog: [String]
         }
     ],
     date: String,
