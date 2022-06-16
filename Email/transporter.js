@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+require("dotenv").config();
 
 let transporter = nodemailer.createTransport({
     // Create a SMTP transporter object
@@ -6,7 +7,7 @@ let transporter = nodemailer.createTransport({
     port: 587,
     auth: {
         user: process.env.MAIL_USER,
-        pass: process.env.MAIL_PASS
+        pass: process.env.MAIL_PASSWORD
     },
     tls: {
         rejectUnauthorized: false
