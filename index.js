@@ -1,10 +1,10 @@
 // APP
 const app = require('./app');
-const port = process.env.PORT || 5445;
+const port = process.env.PORT
 
 // DB
 const mongoose = require('mongoose');
-const database = process.env.DATABASE || 'mongodb+srv://amigoinvisibleadmin:powalolA88@amigoinvisible.mvn1l.mongodb.net/amigoinvisible?retryWrites=true&w=majority';
+const database = process.env.DATABASE
 const connection = database;
 
 main().catch(err => console.log(err));
