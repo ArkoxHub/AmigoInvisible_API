@@ -1,8 +1,12 @@
 // CONTROLER RECEIVES DRAW REQUEST FROM CLIENT
 const Draw = require('../Models/Draw');
 const crypto = require('crypto')
-const transpsorter = require('../Email/transporter');
-const message = require('../Email/message');
+
+// Email
+const transporter = require('../Emails/transporter');
+var handlebarOptions = require('../Emails/handlebarOptions');
+var hbs = require('nodemailer-express-handlebars');
+var mailOptions = require('../Emails/mailOptions');
 
 let controller = {
     getUserResult: function (req, res) {
@@ -23,36 +27,39 @@ let controller = {
     // METHOD TO SEND MAILS
     sendEmails: function (req, res) {
         try {
+            // Get request data
             let drawRequest = req.body;
-
             const draw = new Draw({
                 drawID: crypto.randomUUID(),
-                name: drawRequest.name,
+                title: drawRequest.name,
                 price: drawRequest.price,
-                date: new Date(),
+                date: getCurrentDate(),
                 comments: drawRequest.comments,
                 participants: drawRequest.participants,
                 sent: false
             });
 
-            console.log(draw);
+            // Save draw in database
             draw.save();
 
+            transporter.use('compile', hbs(handlebarOptions));
 
-            // Send the email
-            transpsorter.sendMail(message("agualandreu@gmail.com", "<h2>Hello World from Nodejs NodeMailer</h2>"), (err, info) => {
-                if (err) {
-                    return res.status(500).json({
-                        message: "Error",
-                        error: err
-                    })
-
-                } else {
-                    return res.status(200).json({
-                        message: 'Success',
-                        info: info
-                    })
-                }
+            draw.participants.forEach(participant => {
+                // Send the email
+                transporter.sendMail(mailOptions(participant.email, draw.title, participant.name, draw.date, draw.price, draw.comments, 
+                    "www.amigoinvisible.net"), (err, info) => {
+                    if (err) {
+                        return res.status(500).json({
+                            message: "Error",
+                            error: err
+                        })
+                    } else {
+                        return res.status(200).json({
+                            message: 'Success',
+                            info: info
+                        })
+                    }
+                })
             })
 
         } catch (error) {
@@ -63,6 +70,25 @@ let controller = {
         }
     },
 }
+
+// Function to get current date dd/mm/yyyy
+function getCurrentDate() {
+    let date = new Date();
+    let day = date.getDate();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    if (day < 10) {
+        day = '0' + day;
+    }
+
+    if (month < 10) {
+        month = '0' + month;
+    }
+
+    return day + '/' + month + '/' + year;
+}
+
 
 // EXPORT CONTROLLER
 module.exports = controller;

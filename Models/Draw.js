@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 let draw = new mongoose.Schema({
     drawID: String,
-    name: String,
+    title: String,
     price: String,
     date: Date,
     comments: String,

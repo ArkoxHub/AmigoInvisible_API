@@ -1,0 +1,134 @@
+<!-- 
+    Paremeters for this page:
+    - 'title': Title of the draw
+    - 'date': Date of the draw
+    - 'comment': Comment of the draw
+    - 'resultLink': Link to the result of the draw
+    - 'wishlistLink': Link to the wishlist page of the draw https://www.amigoinvisible.net/lista-de-deseos
+    - 'giftsLink': Link to the gifts page https://www.amigoinvisible.net/regalos-amigo-invisible
+ -->
+<!DOCTYPE html>
+<html lang="es" style="box-sizing: border-box;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎁 Sorteo amigo invisible</title>
+</head>
+
+<body style="font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            color: #333;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            padding: 0px;
+            margin: 0 auto;">
+    <div style="max-width: 600px; margin: 0 auto;">
+        <!-- TABLE -->
+        <table style="width: 100%; background-color: #f3e9e9;" cellspacing="0">
+            <!-- INFO -->
+            <thead>
+                <tr>
+                    <th style="text-align: center; padding: 15px 20px;">
+                        <h1
+                            style="font-size: 22px;color: #0f172a;text-transform: uppercase;width: fit-content;margin: 0 auto;margin-bottom: 10px;">
+                            - Sorteo amigo invisible -
+                        </h1>
+                    </th>
+                </tr>
+                <tr>
+                    <td style="padding: 0px 20px;">Hola {{ name }}, aquí tienes la información del sorteo del amigo
+                        invisible.</td>
+                </tr>
+                <tr>
+                    <td style="padding: 0px 20px;">{{ title }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 0px 20px;"><strong>Fecha del sorteo:</strong> {{ date }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 0px 20px 20px 20px"><strong>Comentario:</strong> {{ comment }}</td>
+                </tr>
+            </thead>
+            <!-- END INFO -->
+            <!-- BODY -->
+            <tbody>
+                <!-- RESULT -->
+                <tr style="padding-top: 15px; background-color: #0f172a; color: #fff">
+                    <td>
+                        <h2 style="text-align: center;">Te ha tocado regalarle a...</h2>
+                    </td>
+                </tr>
+                <tr style="background-color: #0f172a; color: #fff">
+                    <td style="padding: 0px 20px 20px 20px">
+                        <a href="{{ resultLink }}" class="btn btn-primary"
+                            style="display: block;background-color: #ffc73b;color: #333;padding: 10px 35px;border-radius: 5px;text-decoration: none;text-transform: uppercase;margin-bottom: 30px; width: 150px; margin: auto; text-align: center; font-weight: bold;">
+                            Ver resultado
+                        </a>
+                    </td>
+                </tr>
+                <!-- END RESULT -->
+
+                <!-- WISHLIST -->
+                <tr>
+                    <td style="background-color: #fff;">
+                        <h2 style="text-align: center;">Lista de deseos</h2>
+                    </td>
+                </tr>
+                <tr style="text-align: center;">
+                    <td style="background-color: #fff; padding: 0px 20px;">Cada participante puede agregar una lista de
+                        regalos que le
+                        gustaría recibir, así la persona que
+                        te ha tocado lo tendrá un poco más fácil.</td>
+                </tr>
+                <tr style="text-align: center;">
+                    <td style="background-color: #fff; padding: 0px 20px;">Tan solo vuestro grupo puede ver esta lista.
+                    </td>
+                </tr>
+                <tr style="text-align: center;">
+                    <td style="background-color: #fff; padding: 10px 20px 20px 20px;">
+                        Accede a <a style=" color: dodgerblue" href=" {{ wishlistLink }}" class="btn btn-secundary">la
+                            lista de deseos</a>.
+                    </td>
+                </tr>
+                <!-- END WISHLIST -->
+
+                <!-- GIFTS -->
+                <tr>
+                    <td>
+                        <h2 style="text-align: center;">Ideas para regalos</h2>
+                    </td>
+                </tr>
+                <tr style="text-align: center;">
+                    <td style="padding: 0px 20px;">
+                        En amigoinvisible.net queremos echarte un cable, por eso hemos creado una sección de regalos
+                        para que tengas claro qué regalar.
+                    </td>
+                </tr>
+                <tr style="text-align: center;">
+                    <td style="padding: 10px 20px 20px 20px">
+                        Consulta nuestra <a style="color: dodgerblue" href="{{ giftsLink }}"
+                            class="btn btn-secundary">sección de regalos</a>.
+                    </td>
+                </tr>
+                <!-- END GIFTS -->
+
+                <!-- THANKS -->
+                <tr style="text-align: center; background-color: #333; color: #fff">
+                    <td style="padding-top: 25px;">Sorteo realizado en
+                        <a style="color: dodgerblue" href=" www.amigoinvisible.net">amigoinvisible.net</a>.
+                    </td>
+                </tr>
+                <tr style="text-align: center; background-color: #333; color: #fff">
+                    <td style="padding-bottom: 20px;">Gracias por usar nuestro servicio.</td>
+                </tr>
+                <!-- END THANKS -->
+
+            </tbody>
+            <!-- END BODY -->
+        </table>
+        <!-- END TABLE -->
+</body>
+
+</html>

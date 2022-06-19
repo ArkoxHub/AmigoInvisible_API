@@ -1,0 +1,192 @@
+<!-- 
+    Paremeters for this page:
+    - 'title': Title of the draw
+    - 'date': Date of the draw
+    - 'comment': Comment of the draw
+    - 'resultLink': Link to the result of the draw
+    - 'wishlistLink': Link to the wishlist page of the draw https://www.amigoinvisible.net/lista-de-deseos
+    - 'giftsLink': Link to the gifts page https://www.amigoinvisible.net/regalos-amigo-invisible
+ -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎁 Sorteo amigo invisible</title>
+    <style>
+        /* General */
+        html {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 16px;
+            color: #333;
+            box-sizing: border-box;
+            background-color: #f9f9f9;
+            padding: 0px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .info-container,
+        .result-container,
+        .wishlist-container,
+        .gifts-container,
+        .thanks-container {
+            display: flex;
+            flex-flow: column wrap;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            font-size: 22px;
+            color: #0f172a;
+            text-transform: uppercase;
+            width: fit-content;
+            margin: 0 auto;
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: dodgerblue;
+        }
+
+        /*  Draw */
+        .info-container {
+            background-color: #f3e9e9;
+            display: block;
+            padding: 20px;
+        }
+
+        .info-container>span {
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .draw-info {
+            width: 100%;
+        }
+
+        .draw-info span {
+            width: 100%;
+            display: block
+        }
+
+        /* Result */
+        .result-container {
+            background-color: #0f172a;
+        }
+
+        .result-container h2 {
+            font-size: 20px;
+            color: #ffc73b;
+            margin: 0px;
+            padding: 15px 0px
+        }
+
+        .btn.btn-primary {
+            display: block;
+            background-color: #ffc73b;
+            color: #333;
+            padding: 10px 35px;
+            border-radius: 5px;
+            text-decoration: none;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        /* Wishlist */
+        .wishlist-container {
+            padding: 20px;
+        }
+
+        .wishlist-container h2 {
+            padding: 0px;
+            margin: 0px;
+            margin-bottom: 5px;
+        }
+
+        /* Gifts */
+        .gifts-container {
+            padding: 20px;
+            background-color: #f3e9e9;
+        }
+
+        .gifts-container h2 {
+            padding: 0px;
+            margin: 0px;
+            margin-bottom: 5px;
+        }
+
+        .thanks-container {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- INFO -->
+        <div class="info-container">
+            <h1>- Sorteo amigo invisible -</h1>
+            <span>Hola {{ name }}, aquí tienes la información del sorteo del amigo invisible.</span>
+            <div class="draw-info">
+                <span><strong>{{ title }}</strong></span>
+                <span><strong>Fecha del sorteo:</strong> {{ date }}</span>
+                <span><strong>Comentario:</strong> {{ comment }}</span>
+            </div>
+        </div>
+
+        <!--LINK -->
+        <div class="result-container">
+            <h2>Te ha tocado regalarle a...</h2>
+            <span>
+                <a href="{{ resultLink }}" class="btn btn-primary">
+                    Ver resultado
+                </a>
+            </span>
+        </div>
+
+        <!-- WISHLIST -->
+        <div class="wishlist-container">
+            <h2>Lista de deseos</h2>
+            <span>Cada participante puede agregar una lista de regalos que le gustaría recibir, así la persona que
+                te ha tocado lo tendrá un poco más fácil.</span>
+            <span>Solo vuestro grupo puede ver esta lista.</span>
+            <span style="margin-top: 20px;">
+                Accede a <a href="{{ wishlistLink }}" class="btn btn-secundary">la lista de deseos</a>.
+            </span>
+        </div>
+
+        <!-- GIFTS -->
+        <div class="gifts-container">
+            <h2>Ideas para regalos</h2>
+            <span>En amigoinvisible.net queremos echarte un cable, por eso hemos creado una sección de regalos para que
+                tengas claro qué regalar</span>
+            <span style="margin-top: 20px">Consulta nuestra <a href="{{ giftsLink }}" class="btn btn-secundary">sección
+                    de regalos</a>.</span>
+        </div>
+
+        <!-- THANKS -->
+        <div class="thanks-container">
+            <span style="margin-bottom: 5px">Sorteo realizado en <a
+                    href="www.amigoinvisible.net">amigoinvisible.net</a>.</span>
+            <span>Gracias por usar nuestro servicio.</span>
+        </div>
+    </div>
+</body>
+
+</html>
