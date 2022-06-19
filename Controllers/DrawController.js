@@ -25,7 +25,7 @@ let controller = {
     },
 
     // METHOD TO SEND MAILS
-    sendEmails: function (req, res) {
+    sendEmails: async function (req, res) {
         try {
             // Get request data
             let drawRequest = req.body;
@@ -42,24 +42,26 @@ let controller = {
             // Save draw in database
             draw.save();
 
+            console.log(draw);
+
             transporter.use('compile', hbs(handlebarOptions));
 
             draw.participants.forEach(participant => {
                 // Send the email
-                transporter.sendMail(mailOptions(participant.email, draw.title, participant.name, draw.date, draw.price, draw.comments, 
+                transporter.sendMail(mailOptions(participant.email, draw.title, participant.name, draw.date, draw.price, draw.comments,
                     "www.amigoinvisible.net"), (err, info) => {
-                    if (err) {
-                        return res.status(500).json({
-                            message: "Error",
-                            error: err
-                        })
-                    } else {
-                        return res.status(200).json({
-                            message: 'Success',
-                            info: info
-                        })
-                    }
-                })
+                        if (err) {
+                            return res.status(500).json({
+                                message: "Error",
+                                error: err
+                            })
+                        } else {
+                            return res.status(200).json({
+                                message: 'Success',
+                                info: info
+                            })
+                        }
+                    })
             })
 
         } catch (error) {
