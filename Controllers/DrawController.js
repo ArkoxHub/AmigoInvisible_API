@@ -51,6 +51,7 @@ let controller = {
                 transporter.sendMail(mailOptions(participant.email, draw.title, participant.name, draw.date, draw.price, draw.comments,
                     "www.amigoinvisible.net"), (err, info) => {
                         if (err) {
+                            console.log(err)
                             return res.status(500).json({
                                 message: "Error",
                                 error: err
