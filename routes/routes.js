@@ -7,7 +7,7 @@ const router = express.Router();
 const drawController = require("../Controllers/DrawController");
 
 // MIDDLEWARES
-router.get('/getDraw', drawController.getUserResult);
+router.get('/getUserData/:id', drawController.getUserData);
 router.post('/sendEmails', drawController.sendEmails);
 
 module.exports = router;

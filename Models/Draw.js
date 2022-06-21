@@ -6,6 +6,7 @@ let draw = new mongoose.Schema({
     price: String,
     date: Date,
     comments: String,
+    host: String,
     participants: [
         {
             participantID: Number,

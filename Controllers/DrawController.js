@@ -2,6 +2,8 @@
 const Draw = require('../Models/Draw');
 const crypto = require('crypto')
 
+const resultLink = 'www.amigoinvisible.net/resultado/'
+
 // Email
 const transporter = require('../Emails/transporter');
 var handlebarOptions = require('../Emails/handlebarOptions');
@@ -9,18 +11,28 @@ var hbs = require('nodemailer-express-handlebars');
 var mailOptions = require('../Emails/mailOptions');
 
 let controller = {
-    getUserResult: function (req, res) {
+    // GET USER PARTICIPANT
+    getUserData: function (req, res) {
         try {
-            let drawRequest = req.params;
-            console.log(drawRequest);
+            const id = req.params.id
 
-            return res.status(200).json({
-                message: 'Draw request received',
-            })
-        } catch (error) {
-            return res.status(500).json({
-                message: "Error enviando los correos"
-            })
+            // Get draw.participant by id
+            Draw.findOne({ 'participants._id': id }, { "participants.$": 1 }, function (err, draw) {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send({ message: 'Error en el servidor' });
+                } else {
+                    if (draw) {
+                        res.status(200).send(draw);
+                    } else {
+                        res.status(200).send({ message: 'Participante no encontrado' });
+                    }
+                }
+            });
+        }
+        catch (err) {
+            console.log(err);
+            res.status(500).send({ message: 'Error obteniendo el participante' });
         }
     },
 
@@ -35,6 +47,7 @@ let controller = {
                 price: drawRequest.price,
                 date: getCurrentDate(),
                 comments: drawRequest.comments,
+                host: drawRequest.host,
                 participants: drawRequest.participants,
                 sent: false
             });
@@ -48,8 +61,8 @@ let controller = {
 
             draw.participants.forEach(participant => {
                 // Send the email
-                transporter.sendMail(mailOptions(participant.email, draw.title, participant.name, draw.date, draw.price, draw.comments,
-                    "www.amigoinvisible.net"), (err, info) => {
+                transporter.sendMail(mailOptions(participant.email, draw.title, participant.name, draw.date, draw.price, draw.comments, draw.host,
+                    resultLink + participant._id), (err, info) => {
                         if (err) {
                             console.log(err)
                             return res.status(500).json({
