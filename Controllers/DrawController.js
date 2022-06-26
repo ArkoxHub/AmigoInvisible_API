@@ -2,7 +2,7 @@
 const Draw = require('../Models/Draw');
 const crypto = require('crypto')
 
-const resultLink = 'www.amigoinvisible.net/resultado/'
+const resultLink = 'https://www.amigoinvisible.net/resultado/'
 
 // Email
 const transporter = require('../Emails/transporter');

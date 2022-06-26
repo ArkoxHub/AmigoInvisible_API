@@ -1,8 +1,11 @@
 <!-- 
     Paremeters for this page:
     - 'title': Title of the draw
+    - 'name': Name of the participant
+    - 'price': Price of the draw
     - 'date': Date of the draw
     - 'comment': Comment of the draw
+    - 'host': Host of the draw
     - 'resultLink': Link to the result of the draw
     - 'wishlistLink': Link to the wishlist page of the draw https://www.amigoinvisible.net/lista-de-deseos
     - 'giftsLink': Link to the gifts page https://www.amigoinvisible.net/regalos-amigo-invisible
@@ -38,20 +41,24 @@
                     </th>
                 </tr>
                 <tr>
-                    <td style="padding: 0px 20px;">{{ name }}, {{ host }} te ha invitado a participar en el sorteo del
-                        amigo invisible. A continuación puedes ver toda la información.</td>
+                    <td style="padding: 1px 20px;"><strong>{{ name }}</strong>, aquí tienes la información del sorteo
+                        del amigo invisible al cual has sido invitado a participar.</td>
                 </tr>
                 <tr>
-                    <td style="padding: 0px 20px;">{{ title }}</td>
+                    <td style="padding: 1px 20px;"><strong>Título del sorteo:</strong> {{ title }}</td>
                 </tr>
                 <tr>
-                    <td style="padding: 0px 20px;"><strong>Fecha del sorteo:</strong> {{ date }}</td>
+                    <td style="padding: 1px 20px;"><strong>Precio aproximado:</strong> {{ price }}</td>
                 </tr>
                 <tr>
-                    <td style="padding: 0px 20px 20px 20px"><strong>Comentario:</strong> {{ comment }}</td>
+                    <td style="padding: 1px 20px;"><strong>Fecha del sorteo:</strong> {{ date }}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 1px 20px 20px 20px"><strong>Comentario:</strong> {{ comment }}</td>
                 </tr>
             </thead>
             <!-- END INFO -->
+
             <!-- BODY -->
             <tbody>
                 <!-- RESULT -->
@@ -88,8 +95,8 @@
                 </tr>
                 <tr style="text-align: center;">
                     <td style="background-color: #fff; padding: 10px 20px 20px 20px;">
-                        Accede a <a style=" color: dodgerblue" href=" {{ wishlistLink }}" class="btn btn-secundary">la
-                            lista de deseos</a>.
+                        Accede a la <a style=" color: dodgerblue !important" href=" {{ wishlistLink }}"
+                            class="btn btn-secundary">lista de deseos</a>.
                     </td>
                 </tr>
                 <!-- END WISHLIST -->
@@ -102,7 +109,7 @@
                 </tr>
                 <tr style="text-align: center;">
                     <td style="padding: 0px 20px;">
-                        En amigoinvisible.net queremos echarte un cable, por eso hemos creado una sección de regalos
+                        En amigoinvisible queremos echarte un cable, por eso hemos creado una sección de regalos
                         para que tengas claro qué regalar.
                     </td>
                 </tr>
@@ -117,7 +124,7 @@
                 <!-- THANKS -->
                 <tr style="text-align: center; background-color: #333; color: #fff">
                     <td style="padding-top: 25px;">Sorteo realizado en
-                        <a style="color: dodgerblue" href=" www.amigoinvisible.net">amigoinvisible.net</a>.
+                        <a style="color: dodgerblue !important" href=" www.amigoinvisible.net">amigoinvisible.net</a>.
                     </td>
                 </tr>
                 <tr style="text-align: center; background-color: #333; color: #fff">

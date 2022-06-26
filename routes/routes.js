@@ -7,7 +7,10 @@ const router = express.Router();
 const drawController = require("../Controllers/DrawController");
 
 // MIDDLEWARES
+
+/* AMIGO INVISIBLE */
 router.get('/getUserData/:id', drawController.getUserData);
 router.post('/sendEmails', drawController.sendEmails);
+/* END AMIGO INVISIBLE */
 
 module.exports = router;
