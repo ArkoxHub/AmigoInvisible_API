@@ -41,14 +41,16 @@ let controller = {
         try {
             // Get request data
             let drawRequest = req.body;
+
             const draw = new Draw({
                 drawID: crypto.randomUUID(),
                 title: drawRequest.name,
                 price: drawRequest.price,
-                date: getCurrentDate(),
+                date: drawRequest.date.split("-").reverse().join("-"),
                 comments: drawRequest.comments,
                 host: drawRequest.host,
                 participants: drawRequest.participants,
+                dateRegistration: new Date(),
                 sent: false
             });
 
@@ -103,6 +105,10 @@ function getCurrentDate() {
     }
 
     return day + '/' + month + '/' + year;
+}
+
+function transformDateFormat(date) {
+    return date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear()
 }
 
 

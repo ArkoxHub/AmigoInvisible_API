@@ -8,7 +8,7 @@ function mailOptions(messageTo, drawTitle, name, date, price, comment, host, res
         context: {
             title: drawTitle,
             name: name,
-            price, price,
+            price: price,
             comment: comment,
             host: host,
             date: date,

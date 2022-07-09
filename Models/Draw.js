@@ -4,7 +4,7 @@ let draw = new mongoose.Schema({
     drawID: String,
     title: String,
     price: String,
-    date: Date,
+    date: String,
     comments: String,
     host: String,
     participants: [
@@ -18,7 +18,7 @@ let draw = new mongoose.Schema({
             errorsLog: [String]
         }
     ],
-    date: String,
+    dateRegistration: Date,
     sent: Boolean,
 });
 
