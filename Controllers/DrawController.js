@@ -61,24 +61,23 @@ let controller = {
 
             transporter.use('compile', hbs(handlebarOptions));
 
-            await draw.participants.forEach(participant => {
+            for (participant of draw.participants) {
                 // Send the email
-                transporter.sendMail(mailOptions(participant.email, draw.title, participant.name, draw.date, draw.price, draw.comments, draw.host,
-                    resultLink + participant._id), (err, info) => {
-                        if (err) {
-                            console.log(err)
-                            return res.status(500).json({
-                                message: "Error",
-                                error: err
-                            })
-                        } else {
-                            return res.status(200).json({
-                                message: 'Success',
-                                info: info
-                            })
-                        }
-                    })
-            })
+                transporter.sendMail(mailOptions(participant.email,
+                    draw.title,
+                    participant.name,
+                    draw.date,
+                    draw.price,
+                    draw.comments,
+                    draw.host,
+                    resultLink + participant._id),
+                )
+            }
+
+            return res.status(200).json({
+                message: 'Success',
+                info: info
+            });
 
         } catch (error) {
             console.log(error)

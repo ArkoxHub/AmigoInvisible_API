@@ -8,7 +8,10 @@ let transporter = nodemailer.createTransport({
     auth: {
         user: process.env.MAIL_USER,
         pass: process.env.MAIL_PASSWORD
-    }
+    },
+    pool: true,
+    maxConnections: 100,
+    maxMessages: Infinity
 });
 
 module.exports = transporter;
