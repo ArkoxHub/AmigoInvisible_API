@@ -61,6 +61,7 @@ let controller = {
 
             transporter.use('compile', hbs(handlebarOptions));
 
+            let status = false
             for (participant of draw.participants) {
                 // Send the email
                 await transporter.sendMail(mailOptions(participant.email,
@@ -72,12 +73,28 @@ let controller = {
                     draw.host,
                     resultLink + participant._id),
                 )
+                    .then(info => {
+                        console.log(info);
+                        status = true
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        status = false
+                    }
+                    );
             }
 
-            return res.status(200).json({
-                message: 'Success',
-                info: info
-            });
+            if (status) {
+                return res.status(200).json({
+                    message: 'Success',
+                });
+            }
+
+            if (!status) {
+                return res.status(500).json({
+                    message: 'Error',
+                });
+            }
 
         } catch (error) {
             console.log(error)
