@@ -61,7 +61,7 @@ let controller = {
 
             transporter.use('compile', hbs(handlebarOptions));
 
-            draw.participants.forEach(participant => {
+            await draw.participants.forEach(participant => {
                 // Send the email
                 transporter.sendMail(mailOptions(participant.email, draw.title, participant.name, draw.date, draw.price, draw.comments, draw.host,
                     resultLink + participant._id), (err, info) => {
