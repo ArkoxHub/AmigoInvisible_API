@@ -74,11 +74,9 @@ let controller = {
                     resultLink + participant._id),
                 )
                     .then(info => {
-                        console.log(info);
                         status = true
                     })
                     .catch(err => {
-                        console.log(err);
                         status = false
                     }
                     );
