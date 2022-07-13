@@ -63,7 +63,7 @@ let controller = {
 
             for (participant of draw.participants) {
                 // Send the email
-                let info = await transporter.sendMail(mailOptions(participant.email,
+                await transporter.sendMail(mailOptions(participant.email,
                     draw.title,
                     participant.name,
                     draw.date,
