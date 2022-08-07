@@ -36,6 +36,34 @@ let controller = {
         }
     },
 
+    /**
+     * Get draw from ID sent by client
+     * @param {*} req 
+     * @param {*} res 
+     */
+    getDrawById: (req, res) => {
+        try {
+            let id = req.params.id;
+            // Find draw by id mongoose
+            Draw.findById(id, function (err, draw) {
+                if (err) {
+                    console.log(err);
+                    res.status(500).send({ message: 'Error en el servidor' });
+                } else {
+                    if (draw) {
+                        res.status(200).send(draw);
+                    } else {
+                        res.status(200).send({ message: 'Draw no encontrado' });
+                    }
+                }
+            })
+        } catch (err) {
+            console.log(err);
+            res.status(500).send({ message: 'Error obteniendo el sorteo' });
+        }
+
+    },
+
     // METHOD TO SEND MAILS
     sendEmails: async function (req, res) {
         try {
@@ -61,7 +89,7 @@ let controller = {
 
             transporter.use('compile', hbs(handlebarOptions));
 
-            let status = false
+            let emailsSent = 0;
             for (participant of draw.participants) {
                 // Send the email
                 await transporter.sendMail(mailOptions(participant.email,
@@ -74,21 +102,20 @@ let controller = {
                     resultLink + participant._id),
                 )
                     .then(info => {
-                        status = true
+                        emailsSent++;
                     })
                     .catch(err => {
-                        status = false
-                    }
-                    );
+                        console.log(err);
+                    })
             }
 
-            if (status) {
+            if (emailsSent == draw.participants.length) {
                 return res.status(200).json({
                     message: 'Success',
                 });
             }
 
-            if (!status) {
+            if (emailsSent < draw.participants.length) {
                 return res.status(500).json({
                     message: 'Error',
                 });
