@@ -1,5 +1,5 @@
 
-function mailOptions(messageTo, drawTitle, name, date, price, comment, host, resultLink, wishlistLink,) {
+function mailOptions(messageTo, drawTitle, name, date, price, comment, host, resultLink, wishlistLink, participantId) {
     return {
         from: '"🎁 Amigo Invisible" <sorteo@amigoinvisible.net>',
         to: messageTo,
@@ -13,8 +13,9 @@ function mailOptions(messageTo, drawTitle, name, date, price, comment, host, res
             host: host,
             date: date,
             resultLink: resultLink,
-            wishlistLink: 'https://www.amigoinvisible.net/lista-de-deseos',
-            giftsLink: "https://www.amigoinvisible.net/regalos-amigo-invisible"
+            wishlistLink: wishlistLink,
+            giftsLink: "https://www.amigoinvisible.net/regalos-amigo-invisible",
+            idParticipant: participantId
         }
     }
 }

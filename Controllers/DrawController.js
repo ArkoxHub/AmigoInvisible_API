@@ -3,6 +3,7 @@ const Draw = require('../Models/Draw');
 const crypto = require('crypto')
 
 const resultLink = 'https://www.amigoinvisible.net/resultado/'
+const wishlist = 'https://www.amigoinvisible.net/lista-de-deseos/'
 
 // Email
 const transporter = require('../Emails/transporter');
@@ -11,7 +12,12 @@ var hbs = require('nodemailer-express-handlebars');
 var mailOptions = require('../Emails/mailOptions');
 
 let controller = {
-    // GET USER PARTICIPANT
+
+    /**
+     * Get specific participant of a draw
+     * @param {*} req 
+     * @param {*} res 
+     */
     getUserData: function (req, res) {
         try {
             const id = req.params.id
@@ -44,7 +50,7 @@ let controller = {
     getDrawById: (req, res) => {
         try {
             let id = req.params.id;
-            // Find draw by id mongoose
+
             Draw.findById(id, function (err, draw) {
                 if (err) {
                     console.log(err);
@@ -61,10 +67,43 @@ let controller = {
             console.log(err);
             res.status(500).send({ message: 'Error obteniendo el sorteo' });
         }
-
     },
 
-    // METHOD TO SEND MAILS
+    /**
+     * Actualiza el sorteo
+     * @param {*} req 
+     * @param {*} res 
+     */
+    updateDraw: async (req, res) => {
+        try {
+            let draw = req.body
+
+            if (!draw) {
+                res.status(400).send({ message: 'Faltan datos', status: 0 });
+                return false;
+            }
+
+            Draw.findByIdAndUpdate(draw._id, draw, { new: true }, ((err, drawUpdated) => {
+                if (err || !drawUpdated) {
+                    res.status(500).send({ message: 'Error en el servidor', status: 0 })
+                } else {
+                    res.status(200).send({ data: drawUpdated, status: 1 })
+                }
+            }))
+
+        } catch (err) {
+            console.log(err);
+            res.status(500).send({ message: 'Error actualizando el sorteo', status: 0 })
+        }
+    },
+
+
+    /**
+     * Send email template to each participant of draw
+     * @param {*} req 
+     * @param {*} res 
+     * @returns 
+     */
     sendEmails: async function (req, res) {
         try {
             // Get request data
@@ -92,14 +131,19 @@ let controller = {
             let emailsSent = 0;
             for (participant of draw.participants) {
                 // Send the email
-                await transporter.sendMail(mailOptions(participant.email,
-                    draw.title,
-                    participant.name,
-                    draw.date,
-                    draw.price,
-                    draw.comments,
-                    draw.host,
-                    resultLink + participant._id),
+                await transporter.sendMail(mailOptions
+                    (
+                        participant.email,
+                        draw.title,
+                        participant.name,
+                        draw.date,
+                        draw.price,
+                        draw.comments,
+                        draw.host,
+                        resultLink + participant._id,
+                        wishlist + draw._id + '/' + participant._id,
+                        participant._id
+                    )
                 )
                     .then(info => {
                         emailsSent++;

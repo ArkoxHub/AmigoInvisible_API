@@ -14,6 +14,7 @@ const wishlistController = require("../Controllers/WishlistController");
 // Draw
 router.get('/getUserData/:id', drawController.getUserData);
 router.get('/getDraw/:id', drawController.getDrawById);
+router.put('/updateDraw', drawController.updateDraw);
 router.post('/sendEmails', drawController.sendEmails);
 
 // Wishlist
