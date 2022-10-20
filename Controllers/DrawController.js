@@ -4,6 +4,7 @@ const crypto = require('crypto')
 
 const resultLink = 'https://www.amigoinvisible.net/resultado/'
 const wishlist = 'https://www.amigoinvisible.net/lista-de-deseos/'
+const recoveryLink = 'https://www.amigoinvisible.net/recuperacion-sorteo/'
 
 // Email
 const transporter = require('../Emails/transporter');
@@ -142,7 +143,8 @@ let controller = {
                         draw.host,
                         resultLink + participant._id,
                         wishlist + draw._id + '/' + participant._id,
-                        participant._id
+                        participant._id,
+                        recoveryLink + draw._id
                     )
                 )
                     .then(info => {
