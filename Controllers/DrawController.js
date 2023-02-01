@@ -58,9 +58,9 @@ let controller = {
                     res.status(500).send({ message: 'Error en el servidor' });
                 } else {
                     if (draw) {
-                        res.status(200).send(draw);
+                        res.status(200).send({ draw: draw, code: 1 });
                     } else {
-                        res.status(200).send({ message: 'Draw no encontrado' });
+                        res.status(200).send({ message: 'Sorteo no encontrado', code: 0 });
                     }
                 }
             })
@@ -112,7 +112,7 @@ let controller = {
 
             const draw = new Draw({
                 drawID: crypto.randomUUID(),
-                title: drawRequest.name,
+                title: drawRequest.title,
                 price: drawRequest.price,
                 date: drawRequest.date.split("-").reverse().join("-"),
                 comments: drawRequest.comments,
